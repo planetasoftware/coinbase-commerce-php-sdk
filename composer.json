@@ -1,0 +1,38 @@
+{
+    "name": "planetasoftware/coinbase-commerce-php-sdk",
+    "description": "PHP SDK for Coinbase commerce REST API",
+    "type": "library",
+    "license": "pending",
+    "keywords": [
+        "crypto",
+        "php",
+        "sdk",
+        "coinbase commerce",
+        "rest",
+        "api v1"
+    ],
+    "homepage": "http://api.nettalkconnect.com/",
+    "support": {
+        "email": "developers@planetasoftware.com"
+    },
+    "config": {
+        "process-timeout": 5000
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "guzzlehttp/guzzle":"6.*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "PlanetaSoftware\\Coinbase\\Commerce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PlanetaSoftware\\Coinbase\\Commerce\\Test\\": "test/"
+        }
+    },
+    "minimum-stability": "stable"
+}
