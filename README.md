@@ -103,6 +103,8 @@ $charge->setDescription('Talk to Anyone, Anytime!');
 $charge->setPricingType('fixed_price');
 $charge->setLocalPrice($money);
 $charge->setRedirectUrl('{https://your.site.com}');
+//Developer defined key value pairs
+$charge->setMetadata(['key'=>'value']);
 
 try{
     // Create the request and get back Coinbase Commerce response
