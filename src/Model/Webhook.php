@@ -387,22 +387,44 @@ class Webhook {
     public function validateWebhookSignature($cc_signature,$secret,$request) {
         if ($cc_signature != hash_hmac('SHA256', $request , $secret)){
 
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
+
 
     /**
-     * Convert event information to Array
+     * Create a webhook object
      * 
      * @param JSON $request
-     * @return array
+     * @return \PlanetaSoftware\Coinbase\Commerce\Model\Webhook
      */
-    public function toArray($request) {
-        
-        return json_decode($request, true);
-    }
-   
-}
+    public static function CreateFromRequest($request) {
 
+        if($request){
+
+            $data = json_decode($request, true);
+
+            $webhook = new Webhook;
+
+            $webhook->setEventId($data['event']['id']);
+            $webhook->setEventType($data['event']['type']);
+            $webhook->setEventCreatedAt($data['event']['created_at']);
+            $webhook->setChargeCode($data['event']['data']['code']);
+            $webhook->setChargeName($data['event']['data']['name']);
+            $webhook->setChargeDescription($data['event']['data']['description']);
+            $webhook->setPaymentLocalAmount($data['event']['data']['payments']['0']['value']['local']['amount']);
+            $webhook->setPaymentLocalCurrency($data['event']['data']['payments']['0']['value']['local']['currency']);
+            $webhook->setPaymentCryptoAmount($data['event']['data']['payments']['0']['value']['crypto']['amount']);
+            $webhook->setPaymentCryptoCurrency($data['event']['data']['payments']['0']['value']['crypto']['currency']);
+            $webhook->setPaymentNetwork($data['event']['data']['payments']['0']['network']);
+            $webhook->setOrderId($data['event']['data']['metadata']['order_id']);
+            
+            return $webhook;
+        }
+        else {
+             throw new \Exception("Message: Request is empty!");
+        }
+    }   
+}
