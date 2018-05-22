@@ -21,7 +21,7 @@ class Charge {
 
     /**
      * Description
-     * More detailed description of the charge
+     * Charge description
      *
      * @var string 
      */
@@ -29,7 +29,7 @@ class Charge {
 
     /**
      * Pricing Type
-     * Charge pricing type no_price or fixed_price
+     * Charge pricing type: no_price or fixed_price
      *
      * @var string 
      */
@@ -39,7 +39,7 @@ class Charge {
      * Local price
      * Price in local fiat currency
      *
-     * @var money 
+     * @var \PlanetaSoftware\Coinbase\Commerce\Model\Money 
      */
     public $local_price;
 
@@ -50,6 +50,14 @@ class Charge {
      * @var string 
      */
     public $redirect_url;
+
+    /**
+     * Metadata
+     * Metadata associated with the charge
+     *
+     * @var array 
+     */
+    public $metadata;
 
     /**
      * Get name
@@ -94,6 +102,15 @@ class Charge {
      */
     public function getRedirectUrl() {
         return $this->redirect_url;
+    }
+
+    /**
+     * Get metadata
+     * 
+     * @return array
+     */
+    public function getMetadata() {
+        return $this->metadata;
     }
 
 
@@ -149,6 +166,17 @@ class Charge {
      */
     public function setRedirectUrl(string $redirect_url){
         $this->redirect_url = $redirect_url;
+        return $this;
+    }
+
+    /**
+     * Set metadata
+     *
+     * @param array $metadata
+     * @return $this
+     */
+    public function setMetadata($metadata){
+        $this->metadata = $metadata;
         return $this;
     }
 
