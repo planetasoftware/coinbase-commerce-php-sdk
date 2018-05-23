@@ -102,7 +102,7 @@ class Webhook {
 
     /**
      * Payment transaction id
-     * Blockchaing transaction id
+     * Blockchain transaction id
      *
      * @var string 
      */

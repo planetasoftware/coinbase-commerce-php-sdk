@@ -92,7 +92,7 @@ class Charge {
      * @return \PlanetaSoftware\Coinbase\Commerce\Model\Money
      */
     public function getLocalPrice() {
-        return json_encode($this->local_price);
+        return $this->local_price;
     }
 
     /**
