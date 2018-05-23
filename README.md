@@ -86,9 +86,11 @@ Below you can find an example for the Charge endpoint ( \charge )
 // Include Composer autoload
 require_once ('vendor/autoload.php');
 
-// Create a client
-$client = new \PlanetaSoftware\Coinbase\Commerce\Client();
-$client->setApiKey('{your API Key}')
+// Create a Http client
+$client = new \PlanetaSoftware\Coinbase\Commerce\Client('{your API Key}');
+
+// Create a Coinbase Commerce Manager
+$coinbase_commerce = new \PlanetaSoftware\Coinbase\Commerce\Manager($client);
 
 // Prepare the charge
 $charge = new \PlanetaSoftware\Coinbase\Commerce\Model\Charge();
@@ -107,14 +109,14 @@ $charge->setRedirectUrl('{https://your.site.com}');
 $charge->setMetadata(['key'=>'value']);
 
 try{
-    // Create the request and get back Coinbase Commerce response
-    $response = $client->createCharge($charge);
+    // Create the Coinbase Commerce charge request
+    $chargeResponse = $coinbase_commerce->createCharge($charge); 
 }catch(\Exception $ex){
     echo $ex->getMessage();
 }
 
-// Print response
-echo ($response);
+// Print charge resource object response
+var_dump($chargeResponse);
 
 ```
 ### Hosted URL
