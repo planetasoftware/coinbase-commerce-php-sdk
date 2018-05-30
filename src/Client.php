@@ -34,11 +34,12 @@ class Client {
 
 
     
-    public function __construct($environment = 'production'){
+    public function __construct($apiKey, $url = self::URL_PRODUCTION){
         
-        $this->_url = ($environment === 'production')? self::URL_PRODUCTION : self::URL_DEVELOPMENT;
-        
-        $this->_client = new \GuzzleHttp\Client();
+        $this->_url = $url;
+        $this->auth = $apiKey;
+
+        $this->_client = new \GuzzleHttp\Client(); 
         
     }
     
@@ -92,7 +93,7 @@ class Client {
             'query' => $query,
             'body'  => null
         ];
-        
+
         return $this->request('GET', $endpoint, $options);
     }
     /**
@@ -151,11 +152,12 @@ class Client {
      * Create charge
      * 
      * @param \PlanetaSoftware\Coinbase\Commerce\Model\Charge $charge 
-     * @return string|null json response content
+     * @return JSON
      */
     public function createCharge(\PlanetaSoftware\Coinbase\Commerce\Model\Charge $charge){
 
         return $this->post("charges",$charge);
+
     }
 
 }
