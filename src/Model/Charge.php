@@ -21,7 +21,7 @@ class Charge {
 
     /**
      * Description
-     * Charge description
+     * Charge description (maximum is 200 characters)
      *
      * @var string 
      */
@@ -58,6 +58,14 @@ class Charge {
      * @var array 
      */
     public $metadata;
+
+    /**
+     * Data
+     * Raw JSON
+     *
+     * @var JSON 
+     */
+    public $data;
 
     /**
      * Get name
@@ -111,6 +119,15 @@ class Charge {
      */
     public function getMetadata() {
         return $this->metadata;
+    }
+
+    /**
+     * Raw data
+     * 
+     * @return JSON
+     */
+    public function getRaw() {
+    	return $this->data;
     }
 
 
@@ -180,5 +197,15 @@ class Charge {
         return $this;
     }
 
-}
+    /**
+     * Set data
+     *
+     * @param JSON $data
+     * @return $this
+     */
+    public function setRaw($data){
+        $this->data = $data;
+        return $this;
+    }
 
+}

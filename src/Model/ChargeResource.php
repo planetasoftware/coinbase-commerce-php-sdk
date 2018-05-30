@@ -108,12 +108,12 @@ class ChargeResource extends \PlanetaSoftware\Coinbase\Commerce\Model\Charge {
     public $litecoin_address;
 
     /**
-     * Metadata
-     * Metadata associated with the charge
+     * Charge payment
+     * Charge payment information
      *
-     * @var array
+     * @var \PlanetaSoftware\Coinbase\Commerce\Model\Payments 
      */
-    public $metadata;
+    public $payments;
 
     /**
      * Get code
@@ -224,12 +224,12 @@ class ChargeResource extends \PlanetaSoftware\Coinbase\Commerce\Model\Charge {
     }
 
     /**
-     * Get metadata
+     * Get payments
      * 
-     * @return array
+     * @return \PlanetaSoftware\Coinbase\Commerce\Model\Payments
      */
-    public function getMetadata() {
-        return $this->metadata;
+    public function getPayments() {
+        return $this->payments;
     }
 
 
@@ -366,14 +366,15 @@ class ChargeResource extends \PlanetaSoftware\Coinbase\Commerce\Model\Charge {
     }
 
     /**
-     * Set metadata
+     * Set charge payment
      *
-     * @param array $metadata
+     * @param \PlanetaSoftware\Coinbase\Commerce\Model\Payment $payments
      * @return $this
      */
-    public function setMetadata($metadata){
-        $this->metadata = $metadata;
+    public function setPayments(\PlanetaSoftware\Coinbase\Commerce\Model\Payments $payments){
+        $this->payments = $payments;
         return $this;
     }
+
 }
 
