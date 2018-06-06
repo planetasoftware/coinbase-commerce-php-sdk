@@ -60,6 +60,15 @@ class Charge {
     public $metadata;
 
     /**
+     * Timeline
+     * Every charge object has a timeline of status updates
+     *
+     * @var array 
+     */
+    public $timeline = [];
+    
+
+    /**
      * Data
      * Raw JSON
      *
@@ -119,6 +128,15 @@ class Charge {
      */
     public function getMetadata() {
         return $this->metadata;
+    }
+
+    /**
+     * Get timeline
+     * 
+     * @return array 
+     */
+    public function getTimeline() {
+        return $this->timeline;
     }
 
     /**
@@ -194,6 +212,19 @@ class Charge {
      */
     public function setMetadata($metadata){
         $this->metadata = $metadata;
+        return $this;
+    }
+
+    /**
+     * Set timeline
+     *
+     * @param array $timeline
+     * @return $this
+     */
+    public function setTimeline($timeline){
+        $this->timeline = $timeline;
+
+
         return $this;
     }
 
