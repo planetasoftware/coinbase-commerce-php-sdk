@@ -9,12 +9,18 @@ namespace PlanetaSoftware\Coinbase\Commerce;
 class Client {
 
 	/**
-     * @var string Production URL for Coinbase Commerce REST API V1
+     * @var URL_PRODUCTION
      */
     const URL_PRODUCTION = 'https://api.commerce.coinbase.com';
 
+    /**
+     * @var API_VERSION
+     */
+    const API_VERSION = '2018-03-22';
 
-        /**
+
+    /**
+     * Client
      * Http Guzzle Client
      *
      * @var \GuzzleHttp\Client
@@ -22,22 +28,41 @@ class Client {
     private $_client;
     
     /**
+     * Url
+     * Coinbase Commerce API
      *
-     * @var string
+     * @var string 
      */
     private $_url;
     
     /**
-     * @var string API Credentials
+     * Auth
+     * API key
+     *
+     * @var string
      */
     private $auth;
 
+    /**
+     * Version
+     * API version
+     *
+     * @var string
+     */
+    private $version;
 
-    
-    public function __construct($apiKey, $url = self::URL_PRODUCTION){
+
+    /**
+     * Constructor
+     * 
+     * @param string $apiKey
+     * @param string $url
+     */
+    public function __construct($apiKey, $apiVersion = self::API_VERSION, $url = self::URL_PRODUCTION){
         
         $this->_url = $url;
         $this->auth = $apiKey;
+        $this->version = $apiVersion;
 
         $this->_client = new \GuzzleHttp\Client(); 
         
@@ -96,6 +121,7 @@ class Client {
 
         return $this->request('GET', $endpoint, $options);
     }
+
     /**
      * General API request
      * 
@@ -112,7 +138,8 @@ class Client {
         
         $guzzleOptions = array_merge($options, [
             \GuzzleHttp\RequestOptions::HEADERS => [
-                    'X-CC-Api-Key' => $this->auth
+                    'X-CC-Api-Key' => $this->auth,
+                    'X-CC-Version' => $this->version
             ]
         ]);
         

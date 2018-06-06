@@ -51,12 +51,10 @@ class Manager {
      */
     public function createCharge(\PlanetaSoftware\Coinbase\Commerce\Model\Charge $charge){
 
-        $request = $this->webservice->createCharge($charge);			
-
+        $request = $this->webservice->createCharge($charge);
         $data = json_decode($request, true);
 
-        return $this->buildChargeResource($data);
-        
+        return $this->buildChargeResource($data);        
     }
 
     /**
@@ -68,12 +66,14 @@ class Manager {
     public function buildChargeResource($data) {
 
     	//create price object
-
         $localMoney = new \PlanetaSoftware\Coinbase\Commerce\Model\Money();
         $ethereumMoney = new \PlanetaSoftware\Coinbase\Commerce\Model\Money();
         $bitcoinMoney = new \PlanetaSoftware\Coinbase\Commerce\Model\Money();
         $bitcoincashMoney = new \PlanetaSoftware\Coinbase\Commerce\Model\Money();
         $litecoinMoney = new \PlanetaSoftware\Coinbase\Commerce\Model\Money();
+
+        //create timeline object
+        $timeline = new \PlanetaSoftware\Coinbase\Commerce\Model\Timeline();
 
         //create payment object
         $chargePayment = new \PlanetaSoftware\Coinbase\Commerce\Model\Payments();
@@ -87,7 +87,9 @@ class Manager {
         $chargeResource->setExpiresAt($data['data']['expires_at']);
         $chargeResource->setHostedUrl($data['data']['hosted_url']);
 
-        $chargeResource->setRedirectUrl($data['data']['redirect_url']);        
+        if(isset($data['data']['redirect_url']))
+        	$chargeResource->setRedirectUrl($data['data']['redirect_url']);  
+
         $chargeResource->setName($data['data']['name']);
         $chargeResource->setDescription($data['data']['description']);
         $chargeResource->setPricingType($data['data']['pricing_type']);
@@ -151,6 +153,9 @@ class Manager {
         }
 
         $chargeResource->setMetadata($data['data']['metadata']);
+
+        $chargeResource->setTimeline($data['data']['timeline']);
+
 
         $chargeResource->setRaw(json_encode($data));
 
