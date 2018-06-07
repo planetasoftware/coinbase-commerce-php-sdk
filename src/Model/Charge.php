@@ -21,7 +21,7 @@ class Charge {
 
     /**
      * Description
-     * Charge description
+     * Charge description (maximum is 200 characters)
      *
      * @var string 
      */
@@ -60,6 +60,23 @@ class Charge {
     public $metadata;
 
     /**
+     * Timeline
+     * Every charge object has a timeline of status updates
+     *
+     * @var array 
+     */
+    public $timeline = [];
+    
+
+    /**
+     * Data
+     * Raw JSON
+     *
+     * @var JSON 
+     */
+    public $data;
+
+    /**
      * Get name
      * 
      * @return string
@@ -92,7 +109,7 @@ class Charge {
      * @return \PlanetaSoftware\Coinbase\Commerce\Model\Money
      */
     public function getLocalPrice() {
-        return json_encode($this->local_price);
+        return $this->local_price;
     }
 
     /**
@@ -111,6 +128,24 @@ class Charge {
      */
     public function getMetadata() {
         return $this->metadata;
+    }
+
+    /**
+     * Get timeline
+     * 
+     * @return array 
+     */
+    public function getTimeline() {
+        return $this->timeline;
+    }
+
+    /**
+     * Raw data
+     * 
+     * @return JSON
+     */
+    public function getRaw() {
+    	return $this->data;
     }
 
 
@@ -180,5 +215,28 @@ class Charge {
         return $this;
     }
 
-}
+    /**
+     * Set timeline
+     *
+     * @param array $timeline
+     * @return $this
+     */
+    public function setTimeline($timeline){
+        $this->timeline = $timeline;
 
+
+        return $this;
+    }
+
+    /**
+     * Set data
+     *
+     * @param JSON $data
+     * @return $this
+     */
+    public function setRaw($data){
+        $this->data = $data;
+        return $this;
+    }
+
+}
