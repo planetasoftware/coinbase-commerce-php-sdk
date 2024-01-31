@@ -17,6 +17,11 @@ Class WebhookHandler  {
     const EVENT_TYPE_CREATED = 'charge:created';
 
     /**
+     * @var EVENT_TYPE_PENDING 
+     */
+    const EVENT_TYPE_PENDING = 'charge:pending';
+
+    /**
      * @var EVENT_TYPE_CONFIRMED
      */
     const EVENT_TYPE_CONFIRMED = 'charge:confirmed';
@@ -25,6 +30,8 @@ Class WebhookHandler  {
      * @var EVENT_TYPE_FAILED
      */
     const EVENT_TYPE_FAILED = 'charge:failed';
+
+
 
 	/**
      * Manager
